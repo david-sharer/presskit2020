@@ -1,0 +1,23 @@
+
+{{ $p := .Site.GetPage "/people" }}
+{{ with .Site.GetPage "/studio" }}
+    <ul>
+        <li>{{ .Title }}</li>
+        <li>{{ .Summary }}</li>
+        {{ range .Params.createdBy }}
+            {{ $what := .what }}
+            <li>
+                {{ with $p.GetPage .who }}
+                    {{ .Params.name }} - {{ $what }}
+                {{ end }}
+            </li>
+        {{ end }}
+    </ul>
+{{ end }}
+
+
+<br />
+{{ range first 10 .Site.RegularPages }}
+    {{ .Title }}
+    {{ .Summary }}
+{{ end }}
